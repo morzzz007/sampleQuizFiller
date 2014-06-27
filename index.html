@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jatek 101 Template</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/source.js"></script>
+  </head>
+  <body ng-controller="sampleAppController">
+    <div>Hello, en egy masik oldalrol beagyazott iframe vagyok</div>
+    <div>Klikk a gombokra, ha mind a ket jatekot kitoltotted meg azt is kiirom neked, hogy nincs tobb jatek most.</div>
+    <div>Ilyen jatekaim vannak:</div>
+
+    <div class="row">
+
+      <div class="col-md-3" ng-if="!filling && !isEverytingFilled()">
+        <hr>
+        <div ng-repeat="game in games | filter: { filled: false }">
+          <p> 
+            <button type="button" class="btn btn-default btn-lg btn-block" ng-bind="game.name" ng-click="fillQuiz(game, $index)"></button>
+          </p>
+        </div>
+      </div>      
+
+      <div class="col-md-3" ng-if="filling">
+        <hr>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+            </div>            
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Random</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Barmi lehetek :)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="radio" ng-repeat="option in fillingQuiz.options">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"><span ng-bind="option.text"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" ng-click="submitQuiz()">Elkuld</button>
+              </div>
+            </div>
+          </form>
+      </div>
+
+      <div class="col-md-3" ng-if="isEverytingFilled()">
+        <hr>
+        <span>Nincs tobb megjelenitheto jatekunk, bocsy :(((</span>
+      </div>
+
+    </div>
+
+  </body>
+</html>
